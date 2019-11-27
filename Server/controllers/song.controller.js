@@ -1,6 +1,5 @@
 
 const Song = require('../models/song.model');
-const mongoose = require('mongoose');
 
 //Imports a request handler
 const requestHandler = require('../helpers/request.helper');

@@ -1,5 +1,4 @@
 const Review = require('../models/review.model');
-const mongoose = require('mongoose');
 
 //Imports a request handler
 const requestHandler = require('../helpers/request.helper');

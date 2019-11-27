@@ -15,7 +15,7 @@ router.get('/get/:id', controller.get_song);
 router.get('/get', controller.get_all_songs);
 
 //Update song information
-router.put('/update/:id', controller.edit_song);
+router.put('/edit/:id', controller.edit_song);
 
 //Delete song
 router.delete('/delete/:id', controller.delete_song);
