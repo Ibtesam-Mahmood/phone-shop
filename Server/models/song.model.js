@@ -6,7 +6,6 @@ let SongSchema = new Schema({
   album: {type: String},
   artist: {type: String},
   img: {type: String},
-  rating: {type: Number, min: 1, max: 5}
 }, {collection: "Songs"});
 
 module.exports = mongoose.model('Song', SongSchema);
