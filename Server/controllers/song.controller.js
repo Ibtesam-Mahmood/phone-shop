@@ -13,7 +13,8 @@ exports.add_song = (req, res) => {
     name: req.body.name,
     album: req.body.album,
     artist: req.body.artist,
-    img: req.body.img
+    img: req.body.img,
+    releaseDate: req.body.releaseDate
   });
   //Attempts to add the song to the database
   newSong.save((err, song) => requestHandler.generic(res, err, song, "song"));
@@ -33,5 +34,5 @@ exports.edit_song = (req, res) => {
 }
 
 exports.delete_song = (req, res) => {
-  Song.findByIdAndDelete(req.params.id, (err, song) => requestHandler.generic(res, err, "Deleted", "message"))
+  Song.findByIdAndDelete(req.params.id, (err, song) => requestHandler.generic(res, err, "Deleted", "message"));
 }
