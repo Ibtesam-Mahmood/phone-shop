@@ -10,7 +10,9 @@
   "author": "Ibtesam Mahmood",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
+    "email-verification": "^0.4.6",
     "express": "^4.17.1",
     "mongoose": "^5.7.12",
     "nodemon": "^2.0.1"
