@@ -36,7 +36,8 @@ exports.add_song = (req, res) => {
     album: req.body.album,
     artist: req.body.artist,
     img: req.body.img,
-    releaseDate: req.body.releaseDate
+    releaseDate: req.body.releaseDate,
+    hidden: false
   });
   //Attempts to add the song to the database
   newSong.save((err, song) => requestHandler.generic(res, err, song, "song"));
@@ -62,7 +63,15 @@ exports.get_all_songs = (req, res) => {
     return songsWithReviews;
   }
 
-  Song.find({}, async (err, songs) => requestHandler.generic(res, err, await itterate_and_add_reviews(songs), "songs"));
+  //The params for the query
+  let queryParams = {};
+
+  if(req.query.hidden != null || req.query.hidden != undefined ){
+    queryParams.hidden = req.query.hidden;
+  }
+
+  //Only gets non hidden songs
+  Song.find(queryParams, async (err, songs) => requestHandler.generic(res, err, await itterate_and_add_reviews(songs), "songs"));
 }
 
 exports.edit_song = (req, res) => {
@@ -70,5 +79,20 @@ exports.edit_song = (req, res) => {
 }
 
 exports.delete_song = (req, res) => {
-  Song.findByIdAndDelete(req.params.id, (err, song) => requestHandler.generic(res, err, "Deleted", "message"));
+  Song.findByIdAndDelete(req.params.id, (err, song) => {
+    if(err){
+      //onError sends an error message
+      return res.status(404).json({error: true, content: err});
+    }
+    else{
+      //Deletes all reviews on a song
+      Review.find({songID: song._id}, (err, reviews) => {
+        if(!err && reviews != null && reviews != undefined){
+          reviews.forEach((review) => review.remove());
+        }
+      });
+
+      res.json({error: false, content: "Deleted"})
+    }
+  });
 }

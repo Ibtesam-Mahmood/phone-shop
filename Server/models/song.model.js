@@ -6,7 +6,8 @@ let SongSchema = new Schema({
   album: {type: String},
   artist: {type: String},
   img: {type: String},
-  releaseDate: {type: Date}
+  releaseDate: {type: Date},
+  hidden: {type: Boolean, required: true}
 }, {collection: "Songs"});
 
 module.exports = mongoose.model('Song', SongSchema);
