@@ -8,6 +8,9 @@ const requestHandler = require('../helpers/request.helper');
 //Email helper used to send emails
 const emailHelper = require('../helpers/email.helper');
 
+//JWT helper
+const jwtHelper = require('../helpers/jwt.helper');
+
 const create_verification = (res, email, user) => {
   
   const verification = new Verification({email: email, user : user});
@@ -96,11 +99,10 @@ exports.resend_email = (req, res) => {
 //Handles logging into the system
 exports.login = (req, res) => {
   User.findOne({email: req.body.email}, (err, user) => {
-    if(err){
+    if(err || user == null){
       //onError returns the error
       return res.status(404).send({error: true, content: "No user found with that email"});
     }
-
     //Verfies user password
     if(!bcrypt.compareSync(req.body.password, user.password)){
       //If password not verifed
@@ -108,6 +110,13 @@ exports.login = (req, res) => {
     }
     else{
       //Password verfied
+      if(user.isAdmin){
+        //Set admin auth cookie
+        res.cookie('adminAuth', jwtHelper.generateAdminAuthJWT(user._id));
+      }
+      //Set logged in auth cookie
+      res.cookie('auth', jwtHelper.generateAuthJWT(user._id));
+
       return res.json({error: false, user: user});
     }
   })

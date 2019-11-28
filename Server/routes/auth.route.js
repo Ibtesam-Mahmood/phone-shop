@@ -4,8 +4,8 @@ const router = express.Router();
 //Functional controller for the song router
 const controller = require('../controllers/auth.controller');
 
-//Middleware import to use middleswares
-const middleware = require('../helpers/middleware.helper');
+//Importing middleware
+const middleware = require('../middleware/email.middleware');
 
 //Creates a new user on the system
 router.post('/signup', middleware.email_unique, controller.sign_up);
