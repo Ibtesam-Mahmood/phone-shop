@@ -11,7 +11,7 @@ const apiRouter = require('./routes/api.route');
 const app = express();
 
 //MongoDB connection
-let dev_db_url = "mongodb+srv://admin:admin@cluster0-tufmn.mongodb.net/songioa?retryWrites=true&w=majority"; //TODO: Make env variable
+let dev_db_url = "mongodb+srv://admin:admin@cluster0-tufmn.mongodb.net/songio?retryWrites=true&w=majority"; //TODO: Make env variable
 mongoose.connect(dev_db_url);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;

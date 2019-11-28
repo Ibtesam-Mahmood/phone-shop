@@ -14,7 +14,7 @@ router.post('/signup', middleware.email_unique, controller.sign_up);
 router.post('/resend-verification/:email', controller.resend_email);
 
 //Confirms the user account
-router.get('/email-verification/:URL', controller.verify_email);
+router.get('/email-verification/:id', controller.verify_email);
 
 //logs the user into the system and presents them an auth token
 router.post('/login', controller.login);

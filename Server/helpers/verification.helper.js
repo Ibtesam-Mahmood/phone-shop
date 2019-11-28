@@ -11,22 +11,14 @@ var myHasher = function(password, tempUserData, insertTempUser, callback) {
   var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
   return insertTempUser(hash, tempUserData, callback);
 };
- 
-// async version of hashing function
-myHasher = function(password, tempUserData, insertTempUser, callback) {
-  bcrypt.genSalt(8, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-      return insertTempUser(hash, tempUserData, callback);
-    });
-  });
-};
 
 //configures the email verification system
 nev.configure({
   verificationURL: 'http://localhost:8080/api/auth/email-verification/${URL}', //TODO: make env variable
   persistentUserModel: User,
+  expirationTime: 600,
   tempUserCollection: 'tempUser',
-
+  shouldSendConfirmation: false,
   transportOptions: {
       service: 'Gmail',
       auth: {
