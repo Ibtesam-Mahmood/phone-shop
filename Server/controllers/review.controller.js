@@ -59,7 +59,7 @@ exports.edit_review = (req, res) => {
   Review.findByIdAndUpdate(req.params.id, {$set: editReview}, (err, review) => {
 
     //Checks if the logged in user is allowed to make this request
-    if(review.userID != req.user._id && !user.isAdmin){
+    if(review.userID != req.user._id && !req.user.isAdmin){
       review.save(); //Reverts changes
       //Unauthorized request
       return res.status(401).json({error: true, content: "Unauthorized"});
@@ -72,7 +72,7 @@ exports.edit_review = (req, res) => {
 exports.delete_review = (req, res) => {
   Review.findById(req.params.id, (err, review) => {
     //Checks if the logged in user is allowed to make this request
-    if(review.userID != req.user._id && !user.isAdmin){
+    if(review.userID != req.user._id && !req.user.isAdmin){
       //Unauthorized request
       return res.status(401).json({error: true, content: "Unauthorized"});
     }
