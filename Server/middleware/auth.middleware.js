@@ -2,8 +2,8 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 //Environment variables
-const privateKey = "Ibtesam"; //TODO: make env variable
-const privateAdminhKey = "IbtesamAdmin"; //TODO: make env variable
+const privateKey = process.env.PRIVATE_KEY; //Private key of jwt for users
+const privateAdminhKey = process.env.PRIMARY_ADMIN_KEY; //Private key of jwt for admins
 
 //Login authentication
 exports.auth = async (req, res, next) => {

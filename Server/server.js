@@ -4,6 +4,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 //Router
 const apiRouter = require('./routes/api.route');
@@ -12,7 +15,7 @@ const apiRouter = require('./routes/api.route');
 const app = express();
 
 //MongoDB connection
-let dev_db_url = "mongodb+srv://admin:admin@cluster0-tufmn.mongodb.net/songio?retryWrites=true&w=majority"; //TODO: Make env variable
+let dev_db_url = process.env.MONGODB_URL; //TODO: Make env variable
 mongoose.connect(dev_db_url);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
@@ -27,7 +30,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/api', apiRouter);
 
 //The the application
-const port = 8080; //TODO: Make env variable
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log("Server running on port " + port);
 });

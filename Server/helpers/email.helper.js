@@ -1,5 +1,8 @@
 //Used to send emails for any controller
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 var sendEmail = (to, subject, html, callback = function(val){}) => {
 
@@ -11,7 +14,7 @@ var sendEmail = (to, subject, html, callback = function(val){}) => {
     requireTLS: true,
     auth: {
       user: 'song.io.verify@gmail.com',
-      pass: 'ibtesam10' //TODO: make env variable
+      pass: process.env.EMAIL_PASSWORD
     }
   });
 
