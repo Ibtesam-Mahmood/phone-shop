@@ -16,6 +16,12 @@ exports.get_all_users = (req, res) => {
 
 exports.edit_user = (req, res) => {
 
+  //Checks if the user making the request is an admin or is the user edited is the user making the request
+  if(req.user._id != req.params.id && !req.user.isAdmin){
+    //Returns an unauthorized error
+    return res.status(401).json({error: true, content: "Unauthorized"});
+  }
+
   //Only lets you edit certain fields about the user
   let editUser = {}
 

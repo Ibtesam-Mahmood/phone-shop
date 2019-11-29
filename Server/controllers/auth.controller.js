@@ -61,7 +61,7 @@ exports.verify_email = (req, res) => {
   // //Verifies the user
   //Deletes the verification object
   Verification.findByIdAndDelete(req.params.id, (err, verify) => {
-    if(err){
+    if(err || verify == null || verify == undefined){
       //onError returns the error
       return res.status(404).send({error: true, content: err});
     }
@@ -85,7 +85,7 @@ exports.resend_email = (req, res) => {
   //Removes the old verification object and creates a new one, also sends a new email to the email specified
   Verification.findOneAndDelete({email: req.params.email}, (err, verify) => {
 
-    if(err){
+    if(err || verify == null || verify == undefined){
       //onError returns the error
       return res.status(404).send({error: true, content: err});
     }
@@ -103,6 +103,10 @@ exports.login = (req, res) => {
       //onError returns the error
       return res.status(404).send({error: true, content: "No user found with that email"});
     }
+
+    //Non active user
+    if(!user.isActive) return res.status(403).send({error: true, content: "User not active"});
+
     //Verfies user password
     if(!bcrypt.compareSync(req.body.password, user.password)){
       //If password not verifed

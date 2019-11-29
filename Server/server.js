@@ -3,6 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 //Router
 const apiRouter = require('./routes/api.route');
@@ -18,6 +19,7 @@ let db = mongoose.connection;
 db.on('error' , console.error.bind(console, "Mongoose connection error"));
 
 //Parsing middleware
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 

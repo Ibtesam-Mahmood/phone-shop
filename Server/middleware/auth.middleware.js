@@ -29,6 +29,7 @@ exports.adminAuth = async (req, res, next) => {
     let user = await User.findById(decoded.user); //Sees if there is a user with an admin key
     if(user.isAdmin){
       //User is an admin
+      req.overide = true;
       return next();
     }
   }catch(e){
@@ -41,3 +42,19 @@ exports.adminAuth = async (req, res, next) => {
     message:"unauthorized. must be an administrator to call this end point"
   });
 }
+
+//Manages authenticating if the user making the request if the user logged in
+//Has admin override controls
+exports.meAuth = async (req, res, next) => {
+
+  //Checks if the user making the request is an admin or is the user removed is the user making the request
+  if(req.user._id != req.params.id && !req.user.isAdmin){
+    //Returns an unauthorized error
+    return res.status(401).json({error: true, content: "Unauthorized"});
+  }
+  else{
+    //User is authenticated to make this request
+    next();
+  }
+
+};
