@@ -55,24 +55,21 @@ exports.edit_review = (req, res) => {
     editReview.content = req.body.content;
   }
 
-  //Only updates nonetent and rating
-  Review.findByIdAndUpdate(req.params.id, {$set: editReview}, (err, review) => {
-
-    //Checks if the logged in user is allowed to make this request
-    if(review.userID != req.user._id && !req.user.isAdmin){
-      review.save(); //Reverts changes
+  return Review.findById(req.params.id, (err, review) => {
+    if((review.userID + "") != req.user._id && !req.user.isAdmin){
       //Unauthorized request
       return res.status(401).json({error: true, content: "Unauthorized"});
     }
 
-    return requestHandler.generic(res, err, "Updated", "message");
+    //Only updates content and rating, only works if authorized
+    return Review.findByIdAndUpdate(req.params.id, {$set: editReview}, (err, review) => requestHandler.generic(res, err, "Updated", "message"));
   });
 }
 
 exports.delete_review = (req, res) => {
   Review.findById(req.params.id, (err, review) => {
     //Checks if the logged in user is allowed to make this request
-    if(review.userID != req.user._id && !req.user.isAdmin){
+    if((review.userID + "") != req.user._id && !req.user.isAdmin){
       //Unauthorized request
       return res.status(401).json({error: true, content: "Unauthorized"});
     }
