@@ -1,0 +1,18 @@
+.snap-scroller {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+
+  border: 2px solid var(--gs0);
+  border-radius: 8px;
+  height: 100vh;
+}
+
+.snap-scroller .snap {
+  scroll-snap-align: start;
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+}
