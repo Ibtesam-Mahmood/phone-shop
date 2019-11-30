@@ -11,6 +11,7 @@ $primary: rgb(111, 0, 255);
   padding: 1em 0;
   width: 100vw;
   position: fixed;
+  z-index: 1000;
 
   a {
       color: white;
