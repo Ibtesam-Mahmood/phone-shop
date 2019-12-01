@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
+import { LoginStateService } from '../login-state.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +16,7 @@ export class LoginComponent implements OnInit {
   // The control for the login form
   form: FormGroup;
 
-  constructor() { }
+  constructor(private _loginState: LoginStateService, private router: Router,) { }
 
   ngOnInit() {
     // Defines the form group and all the validators applie by name
@@ -31,7 +34,11 @@ export class LoginComponent implements OnInit {
 
   // Logs the user in
   login(){
-    return;
+    this._loginState.login(this.email.value, this.password.value, (val) => {
+      if(val){
+        this.router.navigate(['/songs']); // Routers to the songs page when logged in
+      }
+    });
   }
 
 

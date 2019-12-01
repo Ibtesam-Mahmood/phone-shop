@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -75,7 +75,14 @@ exports.verify_email = (req, res) => {
       isActive: true,
       password: verify.user.password
     });
-    newUser.save((err, user) => requestHandler.generic(res, err, user, "User")); //TODO: route to successful verification page
+    newUser.save((err, user) => {
+      if(err) return res.status(400).jso({error: true, content: err});
+
+      //Set logged in auth cookie
+      res.cookie('auth', jwtHelper.generateAuthJWT(user._id));
+      res.json({user: user});
+      requestHandler.generic(res, err, user, "User")
+    }); //TODO: route to successful verification page
   });
 }
 
