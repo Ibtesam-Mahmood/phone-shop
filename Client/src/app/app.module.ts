@@ -9,7 +9,9 @@ import { AppComponent } from './app.component';
 import { NavigatiorComponent } from './navigatior/navigatior.component';
 import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './widgets/carousel/carousel.component';
-import { SongsComponent } from './songs/songs.component'
+import { SongsComponent } from './songs/songs.component';
+import { LoginComponent } from './login/login.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,16 @@ import { SongsComponent } from './songs/songs.component'
     NavigatiorComponent,
     HomeComponent,
     CarouselComponent,
-    SongsComponent
+    SongsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

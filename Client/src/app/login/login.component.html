@@ -1,0 +1,39 @@
+<div>
+  <div>
+    <h4>Login</h4>
+    <form (submit)="login()" [formGroup]="form">
+        <p>Email <input name="email" type="text" formControlName="email"></p>
+
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="alert alert-danger">
+
+        <div *ngIf="email.errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors.pattern">
+          Email does not match format.
+        </div>
+      </div>
+
+      <p>Password <input name="password" type="password" formControlName="password"></p>
+
+      <div *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="alert alert-danger">
+
+        <div *ngIf="password.errors.required">
+          Password cannot be empty.
+        </div>
+      </div>
+
+      <input type="submit" value="Login">
+    </form>
+
+    <div>
+      <p>Or <a href="/signup">Create a new Account</a></p>
+    </div>
+
+    <div>
+      <p><a href="/resend-email">Email validation not sent?</a></p>
+    </div>
+  </div>
+</div>
