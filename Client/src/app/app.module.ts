@@ -12,6 +12,8 @@ import { CarouselComponent } from './widgets/carousel/carousel.component';
 import { SongsComponent } from './songs/songs.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SignupComponent } from './signup/signup.component';
+import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HomeComponent,
     CarouselComponent,
     SongsComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    ResendEmailCodeComponent
   ],
   imports: [
     BrowserModule,
