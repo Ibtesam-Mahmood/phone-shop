@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SongTileComponent implements OnInit {
 
+  //The inputted song into this tile
   @Input() song;
 
   constructor() { }

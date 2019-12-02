@@ -1,0 +1,38 @@
+
+<div class="d-md-flex h-md-100 align-items-center">
+
+  <!-- Song Info Section -->
+
+  <div class="col-md-6 p-0 bg-white h-md-100">
+      <div *ngIf='song' class="align-items-center h-md-100 p-5 justify-content-center">
+        <h2>{{song.name}}</h2>
+        <h4>{{song.artist}}</h4>
+        <h6>{{song.album}}</h6>
+      </div>
+  </div>
+
+
+  <!-- Review Section -->
+
+  <div class="col-md-6 p-0 bg-indigo h-md-100">
+    <div *ngIf='reviews.length > 0'>
+
+
+      <!-- Review List -->
+
+      <div *ngFor='let review of reviews' class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+        <a *ngIf='review.userId && review.user' href="">{{review.user}}</a>
+        <h1>{{review.rating}}</h1>
+        <p>{{review.content}}</p>
+      </div>
+
+      <!-- Review Input -- Only If logged In -->
+
+      <!-- <div class="row" *ngIf='loginState.user'>
+        <select name="" id=""></select>
+      </div> -->
+
+    </div>
+  </div>
+  <div class="col h-100">2</div>
+</div>

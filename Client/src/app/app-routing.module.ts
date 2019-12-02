@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.component';
 import { AddSongComponent } from './add-song/add-song.component';
+import { ProductComponent } from './product/product.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'resend-email', component: ResendEmailCodeComponent},
   {path: 'add-song', component: AddSongComponent},
+  {path: 'product/:id', component: ProductComponent},
 ];
 
 @NgModule({

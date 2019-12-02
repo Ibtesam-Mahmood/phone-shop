@@ -10,6 +10,21 @@ export class HttpServiceService {
 
   constructor(private _http : HttpClient) { }
 
+
+  //User Endpoints
+  getUserById(id){
+    return this._http.get('/api/user/get/' + id);
+  }
+
+
+  //Review endpoints
+
+  //Retreiving all reviews for a song
+  getReviewBySongId(id){
+    return this._http.get('/api/review/get/song/' + id);
+  }
+
+
   //Song endpoints
 
   //Used to get all songs
@@ -26,6 +41,10 @@ export class HttpServiceService {
     ).subscribe(data => {
       console.log(data);
     });
+  }
+
+  getSongById(id){
+    return this._http.get('/api/songs/get/' + id);
   }
 
   //Auth enpoints
