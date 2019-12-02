@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AddSongComponent } from './add-song/add-song.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CookieService } from 'ngx-cookie-service';
     SongsComponent,
     LoginComponent,
     SignupComponent,
-    ResendEmailCodeComponent
+    ResendEmailCodeComponent,
+    AddSongComponent
   ],
   imports: [
     BrowserModule,

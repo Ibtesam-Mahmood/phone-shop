@@ -1,5 +1,8 @@
 <div class="container">
   <ul *ngIf='songs'>
+    <div *ngIf='loginState.user'>
+      <button><a href="/add-song">Add Song</a></button>
+    </div>
     <li *ngFor="let song of songs">
       <div id='song-{{song._id}}'>
         <p>{{song.name}}</p>

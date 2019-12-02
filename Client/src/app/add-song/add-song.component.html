@@ -1,0 +1,28 @@
+<div>
+    <div>
+      <h4>Add Song</h4>
+      <form (submit)="addsong()" [formGroup]="form">
+        <p>Song Name <input name="name" type="text" formControlName="name"></p>
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert alert-danger">
+
+          <div *ngIf="name.errors.required">
+            Song Name is required.
+          </div>
+        </div>
+
+        <p>Artist <input name="artist" type="text" formControlName="artist"></p>
+        <p>Album <input name="album" type="text" formControlName="album"></p>
+        <p>Image Url <input name="img" type="text" formControlName="img"></p>
+
+        <input type="submit" value="Add Song">
+      </form>
+
+      <div>
+        <button><a href="/songs">Browse</a></button>
+      </div>
+
+    </div>
+  </div>
+

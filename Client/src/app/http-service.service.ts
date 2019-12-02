@@ -11,8 +11,21 @@ export class HttpServiceService {
   constructor(private _http : HttpClient) { }
 
   //Song endpoints
+
+  //Used to get all songs
   getAllSongs(){
     return this._http.get('/api/songs/get');
+  }
+
+  //used to add a song to the database
+  addSong(song){
+    return this._http.post(
+      '/api/songs/add',
+      song,
+      {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    ).subscribe(data => {
+      console.log(data);
+    });
   }
 
   //Auth enpoints

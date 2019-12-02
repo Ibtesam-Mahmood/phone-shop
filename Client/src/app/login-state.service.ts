@@ -23,14 +23,21 @@ export class LoginStateService {
 
   constructor(private _http: HttpServiceService, private _cookieService: CookieService) { }
 
+
+  /*
+    Login and Sign up
+  */
+
   //Logs in the user to the system
   login(email, password, then){
     // this._http.login(email, password).
-    this._http.login(email, password).subscribe((data: HttpResponse<object> ) => {
+    this._http.login(email, password).toPromise().then((data) => {
       this.myStorage.setItem('authToken', this._cookieService.get('auth'));
       this.myStorage.setItem('adminAuthToken', this._cookieService.get('adminAuth'));
       this.myStorage.setItem('user', data.body['user']);
       then(true);
+    }).catch(err => {
+      then(false, err);
     });
   }
 
@@ -50,6 +57,14 @@ export class LoginStateService {
     this.myStorage.removeItem('user');
     this._cookieService.delete('adminAuth');
     this._cookieService.delete('auth');
+  }
+
+  /*
+    Songs
+  */
+
+  addSong(name, artist, album, img){
+    this._http.addSong({name, artist, img, album});
   }
 
   get authToken(){return this.myStorage.getItem('authToken')}
