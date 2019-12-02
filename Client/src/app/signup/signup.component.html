@@ -5,7 +5,7 @@
       <ng-container *ngIf="signUpState === 'sent'; then signedUp; else notSignedUp"></ng-container>
       <ng-template #signedUp>
         <h5>Email sent to {{email.value}} please verify your account before logging In</h5>
-        <a href="/login"><button>Login</button></a>
+        <a routerLink="/login"><button>Login</button></a>
       </ng-template>
       <ng-template #notSignedUp>
 
@@ -96,14 +96,14 @@
             </form>
 
             <div>
-              <p>Already have an account <a href="/login">Login</a></p>
+              <p>Already have an account <a routerLink="/login">Login</a></p>
             </div>
       </ng-template>
 
 
 
       <!-- <div>
-        <p><a href="/resend-email">Email validation not sent?</a></p>
+        <p><a routerLink="/resend-email">Email validation not sent?</a></p>
       </div> -->
     </div>
   </div>

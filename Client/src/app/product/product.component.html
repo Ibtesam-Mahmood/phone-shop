@@ -22,10 +22,13 @@
       <!-- Review List -->
 
       <div *ngFor='let review of reviews' class="d-md-flex align-items-center p-5 justify-content-center">
-        <a *ngIf='review.userID && review.user' href="">{{review.user}}</a>
+        <a *ngIf='review.userID && review.user' routerLink="/profile/{{review.userID}}">{{review.user}}</a>
         <h1>{{review.rating}}</h1>
         <p>{{review.content}}</p>
-        <button *ngIf='review.userID === loginState.user._id' (click)='delete(review._id)' >Delete</button>
+        <div *ngIf='loginState.user'>
+            <button *ngIf='review.userID === loginState.user._id' (click)='delete(review._id)' >Delete</button>
+        </div>
+
       </div>
 
       <!-- Review Input -- Only If logged In -->

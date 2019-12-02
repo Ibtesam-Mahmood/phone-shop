@@ -1,6 +1,6 @@
 <div class="song-container">
   <div *ngIf='loginState.user'>
-    <button><a href="/add-song">Add Song</a></button>
+    <button><a routerLink="/add-song">Add Song</a></button>
   </div>
   <ul *ngIf='songs'>
     <li *ngFor="let song of songs">

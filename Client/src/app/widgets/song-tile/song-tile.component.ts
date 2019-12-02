@@ -13,7 +13,6 @@ export class SongTileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.song);
   }
 
 }

@@ -3,13 +3,14 @@
     <a routerLink="/" class="logo">Song.io</a>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="/songs">Songs</a></li>
+        <li><a routerLink="">Home</a></li>
+        <li><a routerLink="/songs">Songs</a></li>
         <ng-template [ngIf]="loginState.user" [ngIfElse]="loggedOut">
-            <li><a href="/"><button (click)="logout()">Logout</button></a></li>
+            <li><a routerLink="/profile/{{loginState.user._id}}">Profile</a></li>
+            <li><a routerLink="/"><button (click)="logout()">Logout</button></a></li>
         </ng-template>
         <ng-template #loggedOut>
-            <li><a href="/login"><button >Login</button></a></li>
+            <li><a routerLink="/login"><button >Login</button></a></li>
         </ng-template>
       </ul>
     </nav>

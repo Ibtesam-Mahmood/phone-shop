@@ -3,7 +3,7 @@
       <h4>Resend Email Verification</h4>
       <ng-container *ngIf="sent === true; else elseTemplate">
           <h5>Email sent to {{email.value}} please verify your account before logging in</h5>
-          <a href="/login"><button>Login</button></a>
+          <a routerLink="/login"><button>Login</button></a>
       </ng-container>
       <ng-template #elseTemplate>
         <form (submit)="resend()" [formGroup]="form">

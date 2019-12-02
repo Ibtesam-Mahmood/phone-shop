@@ -24,6 +24,11 @@ export class HttpServiceService {
     return this._http.get('/api/review/get/song/' + id);
   }
 
+  // Retreiving all reviews by a user
+  getReviewByUserId(id){
+    return this._http.get('/api/review/get/user/' + id);
+  }
+
   // Manages adding a review to a song
   addReview(songId, rating, content){
     return this._http.post(
@@ -42,6 +47,11 @@ export class HttpServiceService {
   //Used to get all songs
   getAllSongs(){
     return this._http.get('/api/songs/get');
+  }
+
+  // Retreiving all reviews by a user
+  getSongsByUserId(id){
+    return this._http.get('/api/songs/get/user/' + id);
   }
 
   //used to add a song to the database
