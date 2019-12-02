@@ -16,6 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ResendEmailCodeComponent } from './resend-email-code/resend-email-code.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AddSongComponent } from './add-song/add-song.component';
+import { SongTileComponent } from './widgets/song-tile/song-tile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddSongComponent } from './add-song/add-song.component';
     LoginComponent,
     SignupComponent,
     ResendEmailCodeComponent,
-    AddSongComponent
+    AddSongComponent,
+    SongTileComponent
   ],
   imports: [
     BrowserModule,

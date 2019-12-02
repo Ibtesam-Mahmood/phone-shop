@@ -1,0 +1,22 @@
+<div id='song-{{song._id}}'>
+  <p>{{song.name}}</p>
+  <p>{{song.album}}</p>
+  <p>{{song.artist}}</p>
+  <div>
+      <ng-template [ngIf]="song.reviews" [ngIfElse]="noReviews">
+          <p>Reviews: {{song.reviews}}</p>
+      </ng-template>
+      <ng-template #noReviews>
+          <p>Reviews: 0</p>
+      </ng-template>
+  </div>
+  <div>
+      <ng-template [ngIf]="song.rating" [ngIfElse]="noRating">
+          <p>Rating: {{song.rating}}</p>
+      </ng-template>
+      <ng-template #noRating>
+          <p>Rating: 0</p>
+      </ng-template>
+  </div>
+
+</div>
