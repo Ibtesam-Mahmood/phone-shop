@@ -1,84 +1,106 @@
 <div>
     <div>
       <h4>Sign Up</h4>
-      <form (submit)="signup()" [formGroup]="form">
 
-        <!-- Email -->
+      <ng-container *ngIf="signUpState === 'sent'; then signedUp; else notSignedUp"></ng-container>
+      <ng-template #signedUp>
+        <h5>Email sent to {{email.value}} please verify your account before logging In</h5>
+        <a href="/login"><button>Login</button></a>
+      </ng-template>
+      <ng-template #notSignedUp>
 
-        <p>Email <input name="email" type="text" formControlName="email"></p>
-        <div *ngIf="email.invalid && (email.dirty || email.touched)"
-            class="alert alert-danger">
+          <form (submit)="signup()" [formGroup]="form">
 
-          <div *ngIf="email.errors.required">
-            Email is required.
-          </div>
-          <div *ngIf="email.errors.pattern">
-            Email does not match format.
-          </div>
-        </div>
+              <!-- Email -->
 
-        <p>Confirm Email <input name="emailConfirm" type="emailConfirm" formControlName="emailConfirm"></p>
-        <div *ngIf="emailConfirm.invalid && (emailConfirm.dirty || emailConfirm.touched)"
-            class="alert alert-danger">
+              <p>Email <input name="email" type="text" formControlName="email"></p>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert alert-danger">
 
-          <div *ngIf="emailConfirm.errors.required">
-            Email Confirmation cannot be empty.
-          </div>
-          <div *ngIf="emailConfirm.errors.noMatch">
-            Email Confirmation and email do not match.
-          </div>
-        </div>
+                <div *ngIf="email.errors.required">
+                  Email is required.
+                </div>
+                <div *ngIf="email.errors.pattern">
+                  Email does not match format.
+                </div>
+              </div>
 
-        <!-- Password -->
+              <p>Confirm Email <input name="emailConfirm" type="emailConfirm" formControlName="emailConfirm"></p>
+              <div *ngIf="emailConfirm.invalid && (emailConfirm.dirty || emailConfirm.touched)"
+                  class="alert alert-danger">
 
-        <p>Password <input name="password" type="password" formControlName="password"></p>
-        <div *ngIf="password.invalid && (password.dirty || password.touched)"
-            class="alert alert-danger">
+                <div *ngIf="emailConfirm.errors.required">
+                  Email Confirmation cannot be empty.
+                </div>
+                <div *ngIf="emailConfirm.errors.noMatch">
+                  Email Confirmation and email do not match.
+                </div>
+              </div>
 
-          <div *ngIf="password.errors.required">
-            Password cannot be empty.
-          </div>
-        </div>
+              <!-- Password -->
 
-        <p>Confirm Password <input name="passwordConfirm" type="password" formControlName="passwordConfirm"></p>
-        <div *ngIf="passwordConfirm.invalid && (passwordConfirm.dirty || passwordConfirm.touched)"
-            class="alert alert-danger">
+              <p>Password <input name="password" type="password" formControlName="password"></p>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                  class="alert alert-danger">
 
-          <div *ngIf="passwordConfirm.errors.required">
-            Password Confirmation cannot be empty.
-          </div>
-          <div *ngIf="passwordConfirm.errors.noMatch">
-            Password Confirmation and password do not match.
-          </div>
-        </div>
+                <div *ngIf="password.errors.required">
+                  Password cannot be empty.
+                </div>
+              </div>
 
-        <!-- Name -->
+              <p>Confirm Password <input name="passwordConfirm" type="password" formControlName="passwordConfirm"></p>
+              <div *ngIf="passwordConfirm.invalid && (passwordConfirm.dirty || passwordConfirm.touched)"
+                  class="alert alert-danger">
 
-        <p>First Name <input name="fName" type="text" formControlName="fName"></p>
-        <div *ngIf="fName.invalid && (fName.dirty || fName.touched)"
-            class="alert alert-danger">
+                <div *ngIf="passwordConfirm.errors.required">
+                  Password Confirmation cannot be empty.
+                </div>
+                <div *ngIf="passwordConfirm.errors.noMatch">
+                  Password Confirmation and password do not match.
+                </div>
+              </div>
 
-          <div *ngIf="fName.errors.required">
-            First Name cannot be empty.
-          </div>
-        </div>
+              <!-- Name -->
 
-        <p>Last Name <input name="lName" type="lName" formControlName="lName"></p>
-        <div *ngIf="lName.invalid && (lName.dirty || lName.touched)"
-            class="alert alert-danger">
+              <p>First Name <input name="fName" type="text" formControlName="fName"></p>
+              <div *ngIf="fName.invalid && (fName.dirty || fName.touched)"
+                  class="alert alert-danger">
 
-          <div *ngIf="lName.errors.required">
-            Last Name cannot be empty.
-          </div>
-        </div>
+                <div *ngIf="fName.errors.required">
+                  First Name cannot be empty.
+                </div>
+              </div>
 
-        <input type="submit" value="Sign Up">
+              <p>Last Name <input name="lName" type="lName" formControlName="lName"></p>
+              <div *ngIf="lName.invalid && (lName.dirty || lName.touched)"
+                  class="alert alert-danger">
 
-      </form>
+                <div *ngIf="lName.errors.required">
+                  Last Name cannot be empty.
+                </div>
+              </div>
 
-      <div>
-        <p>Already have an account <a href="/login">Login</a></p>
-      </div>
+
+              <div *ngIf="signUpState != null">
+                  <div *ngIf="signUpState == 'email'">
+                    <p [style.color]="red">Email not unique</p>
+                  </div>
+                  <div *ngIf="signUpState == 'server'">
+                      <p [style.color]="red">Internal Server Error</p>
+                  </div>
+              </div>
+
+
+              <input type="submit" value="Sign Up">
+
+            </form>
+
+            <div>
+              <p>Already have an account <a href="/login">Login</a></p>
+            </div>
+      </ng-template>
+
+
 
       <!-- <div>
         <p><a href="/resend-email">Email validation not sent?</a></p>

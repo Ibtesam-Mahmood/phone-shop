@@ -23,6 +23,7 @@ export class LoginStateService {
 
   constructor(private _http: HttpServiceService, private _cookieService: CookieService) { }
 
+  //Logs in the user to the system
   login(email, password, then){
     // this._http.login(email, password).
     this._http.login(email, password).subscribe((data: HttpResponse<object> ) => {
@@ -30,6 +31,15 @@ export class LoginStateService {
       this.myStorage.setItem('adminAuthToken', this._cookieService.get('adminAuth'));
       this.myStorage.setItem('user', data.body['user']);
       then(true);
+    });
+  }
+
+  //Signs the user up for the system
+  signup(email, password, fName, lName, then){
+    this._http.signup({email, password, lastName: lName, firstName: fName}).toPromise().then(data => {
+      then(false);
+    }).catch(err => {
+      then(true, err);
     });
   }
 

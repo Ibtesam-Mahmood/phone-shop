@@ -30,7 +30,7 @@ const create_verification = (res, email, user) => {
       else{
         //onError returns the error
         verification.remove(); //removes the verification object from the database
-        return res.status(400).send({error: true, content: "Email not sent"});
+        return res.status(404).send({error: true, content: "Email not sent"});
       }
     });
 
@@ -76,7 +76,7 @@ exports.verify_email = (req, res) => {
       password: verify.user.password
     });
     newUser.save((err, user) => {
-      if(err) return res.status(400).jso({error: true, content: err});
+      if(err) return res.status(400).json({error: true, content: err});
 
       //Set logged in auth cookie
       res.cookie('auth', jwtHelper.generateAuthJWT(user._id));
@@ -130,5 +130,5 @@ exports.login = (req, res) => {
 
       return res.json({error: false, user: user});
     }
-  })
+  });
 }

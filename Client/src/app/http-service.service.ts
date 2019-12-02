@@ -16,6 +16,8 @@ export class HttpServiceService {
   }
 
   //Auth enpoints
+
+  //Used to allow the user to login
   login(email, password) {
     return this._http.post(
       '/api/auth/login',
@@ -23,5 +25,15 @@ export class HttpServiceService {
       {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
     );
   }
+
+  //Used to sign up the user and end verification email
+  signup(user){
+    return this._http.post(
+      '/api/auth/signup',
+      user,
+      {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    );
+  }
+
 
 }

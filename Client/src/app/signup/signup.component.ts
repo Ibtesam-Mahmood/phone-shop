@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 import { matchValidator } from '../helpers/validator.helper';
+import { LoginStateService } from '../login-state.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,14 @@ export class SignupComponent implements OnInit {
   // The control for the login form
   form: FormGroup;
 
-  constructor() { }
+  // Holds the sign up state the user is in
+  // null - no state
+  // sent - email sent
+  // email - email not unique
+  // server - erver error
+  signUpState: string = null;
+
+  constructor(private _loginState: LoginStateService) { }
 
   ngOnInit() {
     // Defines the form group and all the validators applie by name
@@ -47,7 +55,22 @@ export class SignupComponent implements OnInit {
 
   // Logs the user in
   signup() {
-    return;
+    this._loginState.signup( this.email.value, this.password.value, this.fName.value, this.lName.value, (failed, err) => {
+      if(!failed){
+        // No error, email sent
+        this.signUpState = 'sent';
+      }
+      else {
+        if(err.status === 403) {
+          // Email not unique
+          this.signUpState = 'email';
+        }
+        else if(err.status == 404){
+          // Server error
+          this.signUpState = 'server';
+        }
+      }
+    });
   }
 
 
