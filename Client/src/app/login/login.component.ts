@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   // The control for the login form
   form: FormGroup;
 
-  constructor(private _loginState: LoginStateService, private router: Router,) { }
+  constructor(private _loginState: LoginStateService, private router: Router) { }
 
   ngOnInit() {
     // Defines the form group and all the validators applie by name

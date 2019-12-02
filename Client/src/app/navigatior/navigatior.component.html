@@ -5,7 +5,12 @@
       <ul>
         <li><a href="">Home</a></li>
         <li><a href="/songs">Songs</a></li>
-        <li><a href="/login"><button>Login</button></a></li>
+        <ng-template [ngIf]="loginState.user" [ngIfElse]="loggedOut">
+            <li><a href="/"><button (click)="logout()">Logout</button></a></li>
+        </ng-template>
+        <ng-template #loggedOut>
+            <li><a href="/login"><button >Login</button></a></li>
+        </ng-template>
       </ul>
     </nav>
   </div>
