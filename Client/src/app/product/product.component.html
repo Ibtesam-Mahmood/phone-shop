@@ -25,6 +25,7 @@
         <a *ngIf='review.userID && review.user' href="">{{review.user}}</a>
         <h1>{{review.rating}}</h1>
         <p>{{review.content}}</p>
+        <button *ngIf='review.userID === loginState.user._id' (click)='delete(review._id)' >Delete</button>
       </div>
 
       <!-- Review Input -- Only If logged In -->

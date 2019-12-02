@@ -33,6 +33,10 @@ export class HttpServiceService {
     );
   }
 
+  deleteReview(id){
+    return this._http.delete('/api/review/delete/' + id);
+  }
+
   //Song endpoints
 
   //Used to get all songs

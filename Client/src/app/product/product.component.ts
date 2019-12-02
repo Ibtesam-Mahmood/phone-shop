@@ -35,6 +35,13 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  //Deletes a review
+  delete(id){
+    this._http.deleteReview(id).subscribe(data => {
+      this.reviews = this.reviews.filter(review => review._id !== id);
+    });
+  }
+
   getSong(){
     // Gets new song information for song
     this._http.getSongById(this.songID).subscribe((data) => {
@@ -62,7 +69,6 @@ export class ProductComponent implements OnInit {
       console.log(data);
       let review = data['body']['review'];
       //Adds the user name to the review
-      console.log(this.loginState.user);
       review.user = this.loginState.user['firstName'] + " " + this.loginState.user['lastName'];
       this.reviews.push(review); // Displays the review
       this.rating = 1;

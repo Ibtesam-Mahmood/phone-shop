@@ -67,7 +67,6 @@ export class LoginStateService {
   get adminAuthToken(){return this.myStorage.getItem('adminAuthToken')}
   get user(){
     const storedUser = this.myStorage.getItem('user');
-    console.log(storedUser);
     if (storedUser === null) {return null;}
     else{ return JSON.parse(storedUser); }
   }
