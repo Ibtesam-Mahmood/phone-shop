@@ -80,8 +80,7 @@ exports.verify_email = (req, res) => {
 
       //Set logged in auth cookie
       res.cookie('auth', jwtHelper.generateAuthJWT(user._id));
-      res.json({user: user});
-      requestHandler.generic(res, err, user, "User")
+      return res.send("Verified");
     }); //TODO: route to successful verification page
   });
 }

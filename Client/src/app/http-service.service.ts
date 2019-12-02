@@ -35,5 +35,18 @@ export class HttpServiceService {
     );
   }
 
+  //Used to resend the users verification email
+  resendVerification(email, callBack){
+    return this._http.post(
+      '/api/auth/resend-verification/' + email,
+      {},
+      {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    ).toPromise().then(data => {
+      callBack(true);
+    }).catch(err => {
+      callBack(false);
+    });
+  }
+
 
 }
