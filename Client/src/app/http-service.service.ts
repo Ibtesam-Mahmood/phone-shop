@@ -24,6 +24,14 @@ export class HttpServiceService {
     return this._http.get('/api/review/get/song/' + id);
   }
 
+  // Manages adding a review to a song
+  addReview(songId, rating, content){
+    return this._http.post(
+      '/api/review/add/' + songId,
+      {rating, content},
+      {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    );
+  }
 
   //Song endpoints
 
@@ -39,7 +47,7 @@ export class HttpServiceService {
       song,
       {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
     ).subscribe(data => {
-      console.log(data);
+
     });
   }
 

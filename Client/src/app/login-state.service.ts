@@ -13,11 +13,6 @@ export class LoginStateService {
 
   // All authenticated http requests go through this service
 
-  _authToken: string = null;
-  _adminAuthToken: string = null;
-
-  _user: object = null;
-
   //Used to store the login objects such as authToken, adminToken, and user
   myStorage: Storage = window.localStorage;
 
@@ -34,7 +29,7 @@ export class LoginStateService {
     this._http.login(email, password).toPromise().then((data) => {
       this.myStorage.setItem('authToken', this._cookieService.get('auth'));
       this.myStorage.setItem('adminAuthToken', this._cookieService.get('adminAuth'));
-      this.myStorage.setItem('user', data.body['user']);
+      this.myStorage.setItem('user', JSON.stringify(data.body['user']) + "");
       then(true);
     }).catch(err => {
       then(false, err);
@@ -70,6 +65,11 @@ export class LoginStateService {
 
   get authToken(){return this.myStorage.getItem('authToken')}
   get adminAuthToken(){return this.myStorage.getItem('adminAuthToken')}
-  get user(){return this.myStorage.getItem('user')}
+  get user(){
+    const storedUser = this.myStorage.getItem('user');
+    console.log(storedUser);
+    if (storedUser === null) {return null;}
+    else{ return JSON.parse(storedUser); }
+  }
 
 }

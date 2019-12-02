@@ -1,10 +1,10 @@
 
-<div class="d-md-flex h-md-100 align-items-center">
+<div class="d-md-flex my-auto">
 
   <!-- Song Info Section -->
 
-  <div class="col-md-6 p-0 bg-white h-md-100">
-      <div *ngIf='song' class="align-items-center h-md-100 p-5 justify-content-center">
+  <div class="col-md-6 p-0 bg-white align-top">
+      <div *ngIf='song' class="align-items-center p-5 ">
         <h2>{{song.name}}</h2>
         <h4>{{song.artist}}</h4>
         <h6>{{song.album}}</h6>
@@ -14,25 +14,33 @@
 
   <!-- Review Section -->
 
-  <div class="col-md-6 p-0 bg-indigo h-md-100">
-    <div *ngIf='reviews.length > 0'>
+  <div class="col-md-6 p-0 bg-indigo d-flex align-items-end justify-content-center align-bottom">
 
+    <div *ngIf='reviews.length > 0'>
+        <h3>Reviews</h3>
 
       <!-- Review List -->
 
-      <div *ngFor='let review of reviews' class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
-        <a *ngIf='review.userId && review.user' href="">{{review.user}}</a>
+      <div *ngFor='let review of reviews' class="d-md-flex align-items-center p-5 justify-content-center">
+        <a *ngIf='review.userID && review.user' href="">{{review.user}}</a>
         <h1>{{review.rating}}</h1>
         <p>{{review.content}}</p>
       </div>
 
       <!-- Review Input -- Only If logged In -->
 
-      <!-- <div class="row" *ngIf='loginState.user'>
-        <select name="" id=""></select>
-      </div> -->
+      <div class="row justify-content-center" *ngIf='loginState.user'>
+        Rating <select name="rating" [(ngModel)]="rating" (ngModelChange)="onRatingChange($event)" >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <input placeholder="Message" [(ngModel)]='message' />
+        <button (click)='submitReview()'>Submit Review</button>
+      </div>
 
     </div>
   </div>
-  <div class="col h-100">2</div>
 </div>
