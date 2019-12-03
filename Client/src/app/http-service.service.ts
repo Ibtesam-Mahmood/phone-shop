@@ -78,9 +78,7 @@ export class HttpServiceService {
       '/api/songs/add',
       song,
       {observe: 'response', withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
-    ).subscribe(data => {
-
-    });
+    );
   }
 
   // Gets the song by id

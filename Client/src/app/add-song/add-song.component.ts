@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginStateService } from '../login-state.service';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { HttpServiceService } from '../http-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-song',
@@ -12,7 +13,7 @@ export class AddSongComponent implements OnInit {
   // The control for the login form
   form: FormGroup;
 
-  constructor(private _loginState: LoginStateService) { }
+  constructor(private _http: HttpServiceService, private router: Router) { }
 
   ngOnInit() {
     // Defines the form group and all the validators applie by name
@@ -32,7 +33,15 @@ export class AddSongComponent implements OnInit {
 
   // Logs the user in
   addsong(){
-    return this._loginState.addSong(this.name.value, this.artist.value, this.album.value, this.img.value);
+    return this._http.addSong({
+      name: this.name.value,
+      artist: this.artist.value,
+      album: this.album.value,
+      img: this.img.value
+    }).subscribe(data => {
+      // Route to songs page
+      return this.router.navigate(['/songs']);
+    });
   }
 
 

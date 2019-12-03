@@ -1,7 +1,6 @@
 
 const Song = require('../models/song.model');
 const Review = require('../models/review.model');
-var sanitizer = require('sanitize')();
 
 //Imports a request handler
 const requestHandler = require('../helpers/request.helper');
@@ -11,11 +10,11 @@ exports.add_song = (req, res) => {
 
   //New song defined by the body of the request
   let newSong = new Song({
-    name: sanitizer.value(req.body.name, 'string'),
+    name: req.body.name,
     poster: req.user._id, //Pulls the poster id from the user logged in
-    album: sanitizer.value(req.body.album, 'string'),
-    artist: sanitizer.value(req.body.artist, 'string'),
-    img: sanitizer.value(req.body.img, 'string'),
+    album: req.body.album,
+    artist: req.body.artist,
+    img: req.body.img,
     releaseDate: req.body.releaseDate,
     hidden: false
   });

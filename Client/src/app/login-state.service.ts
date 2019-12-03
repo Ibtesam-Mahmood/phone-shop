@@ -54,11 +54,6 @@ export class LoginStateService {
     this._cookieService.delete('auth');
   }
 
-  //Adds a song to the server
-  addSong(name, artist, album, img){
-    this._http.addSong({name, artist, img, album});
-  }
-
   get authToken(){return this.myStorage.getItem('authToken')}
   get adminAuthToken(){return this.myStorage.getItem('adminAuthToken')}
   get user(){
