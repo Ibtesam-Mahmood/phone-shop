@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const Verification = require('../models/verification.model')
 const bcrypt = require('bcrypt');
+var sanitizer = require('sanitize')();
 
 //Imports a request handler
 const requestHandler = require('../helpers/request.helper');

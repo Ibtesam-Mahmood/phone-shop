@@ -30,9 +30,19 @@ export class SongsComponent implements OnInit {
   constructor(private _http: HttpServiceService, public loginState: LoginStateService) { }
 
   ngOnInit() {
+
+    let queryString = "hidden=false";
+
+    // No logged in user, restrict query size to 10
+    if(this.loginState.user == null){
+      queryString += '&length=10';
+    }
+
     // Loads all the songs onto the page
-    this._http.getAllSongs("hidden=false").subscribe(data => {
+    this._http.getAllSongs(queryString).subscribe(data => {
       this.songs = data['Songs'];
+
+      console.log(this.songs);
 
       // Defines the search controller
       this.search = new JsSearch.Search('_id');

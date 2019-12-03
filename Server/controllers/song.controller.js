@@ -1,6 +1,7 @@
 
 const Song = require('../models/song.model');
 const Review = require('../models/review.model');
+var sanitizer = require('sanitize')();
 
 //Imports a request handler
 const requestHandler = require('../helpers/request.helper');
@@ -10,11 +11,11 @@ exports.add_song = (req, res) => {
 
   //New song defined by the body of the request
   let newSong = new Song({
-    name: req.body.name,
+    name: sanitizer.value(req.body.name, 'string'),
     poster: req.user._id, //Pulls the poster id from the user logged in
-    album: req.body.album,
-    artist: req.body.artist,
-    img: req.body.img,
+    album: sanitizer.value(req.body.album, 'string'),
+    artist: sanitizer.value(req.body.artist, 'string'),
+    img: sanitizer.value(req.body.img, 'string'),
     releaseDate: req.body.releaseDate,
     hidden: false
   });
@@ -34,15 +35,23 @@ exports.get_song = (req, res) => {
 
 //Handles getting all songs
 exports.get_all_songs = (req, res) => {
+
   //The params for the query
   let queryParams = {};
-
   if(req.query.hidden != null || req.query.hidden != undefined ){
+    //Only gets non hidden songs
     queryParams.hidden = req.query.hidden;
   }
 
-  //Only gets non hidden songs
-  Song.find(queryParams, async (err, songs) => requestHandler.generic(res, err, songs, "Songs"));
+  if(req.query.length != null || req.query.length != undefined){
+    //Length limit
+    return Song.find(queryParams).limit(parseInt(req.query.length)).exec(async (err, songs) => requestHandler.generic(res, err, songs, "Songs"));
+  }
+  else{
+    //No length limit
+    return Song.find(queryParams).exec(async (err, songs) => requestHandler.generic(res, err, songs, "Songs"));
+  }
+  
 }
 
 exports.edit_song = (req, res) => {

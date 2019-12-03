@@ -25,6 +25,7 @@ db.on('error' , console.error.bind(console, "Mongoose connection error"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(require('sanitize').middleware); //Sanitizies all inputs in the body
 
 //Primary route for the server is the REST api
 app.use('/api', apiRouter);
