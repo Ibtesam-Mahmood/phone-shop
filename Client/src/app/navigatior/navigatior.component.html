@@ -5,10 +5,21 @@
       <ul>
         <li><a routerLink="">Home</a></li>
         <li><a routerLink="/songs">Songs</a></li>
+
+        <!-- Login State -->
+
         <ng-template [ngIf]="loginState.user" [ngIfElse]="loggedOut">
+
+            <div *ngIf='loginState.user.isAdmin'>
+                <li><a routerLink="/manage">Manage</a></li>
+            </div>
+
             <li><a routerLink="/profile/{{loginState.user._id}}">Profile</a></li>
             <li><a routerLink="/"><button (click)="logout()">Logout</button></a></li>
         </ng-template>
+
+        <!-- Logout State -->
+
         <ng-template #loggedOut>
             <li><a routerLink="/login"><button >Login</button></a></li>
         </ng-template>

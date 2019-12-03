@@ -12,8 +12,15 @@ export class HttpServiceService {
 
 
   //User Endpoints
+
+  // Used to get a user by thier ID
   getUserById(id){
     return this._http.get('/api/user/get/' + id);
+  }
+
+  // Used to get all users on the system
+  getAllUsers(){
+    return this._http.get('api/user/get');
   }
 
 
@@ -100,6 +107,41 @@ export class HttpServiceService {
     }).catch(err => {
       callBack(false);
     });
+  }
+
+
+  // Admin Endpoint
+
+  // Used to verify that the user is an admin
+  checkAdmin(id){
+    return this._http.get('/api/admin/check');
+  }
+
+  // Toggles the activation for the user
+  toggleUserActivation(id, toggle){
+    return this._http.post(
+      'api/admin/toggle/user/' + id,
+      {toggle},
+      {withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    );
+  }
+
+  // Toggles the activation for the user
+  toggleUserAdmin(id, toggle){
+    return this._http.post(
+      'api/admin/toggle/admin/' + id,
+      {toggle},
+      {withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    );
+  }
+
+  // Toggles the visibility for a song
+  toggleSongVisibility(id, toggle){
+    return this._http.post(
+      'api/admin/toggle/song/' + id,
+      {toggle},
+      {withCredentials: true, headers: new HttpHeaders({"Content-Type": "application/json"})}
+    );
   }
 
 

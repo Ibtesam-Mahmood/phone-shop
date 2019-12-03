@@ -19,6 +19,7 @@ import { AddSongComponent } from './add-song/add-song.component';
 import { SongTileComponent } from './widgets/song-tile/song-tile.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProfileComponent } from './profile/profile.component';
     AddSongComponent,
     SongTileComponent,
     ProductComponent,
-    ProfileComponent
+    ProfileComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

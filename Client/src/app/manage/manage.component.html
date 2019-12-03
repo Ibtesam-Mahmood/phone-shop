@@ -1,0 +1,90 @@
+<div>
+
+  <ng-container *ngIf="checkAdmin == null; else adminChecked">
+
+    <!-- Admin check in progress -->
+    <h2>Loading...</h2>
+
+  </ng-container>
+  <ng-template #adminChecked>
+
+    <!-- Admin Checked -->
+
+    <ng-container *ngIf="checkAdmin; else failed">
+
+      <!-- Admin Approved -->
+      <h2>Manage</h2>
+
+      <!-- Songs and users loaded -->
+      <div *ngIf='users.length > 0 && songs.length > 0'>
+
+        <!-- Select for choose between which view to see -->
+        <select name="viewSwitcher" [(ngModel)]="viewToggle" (ngModelChange)="onViewChange($event)" >
+          <option value="users">Users</option>
+          <option value="songs">Songs</option>
+        </select>
+
+        <!-- List of user controlls -->
+        <div *ngIf="viewToggle == 'users'">
+          <h4>Users</h4>
+          <div class="row" *ngFor='let user of users'>
+            <p><span>{{user.firstName}}</span> <span>{{user.lastName}}</span></p>
+            <p>{{user.email}}</p>
+
+            <!-- Deactivate/Activate user -->
+            <ng-container *ngIf="user.isActive; else userInActive">
+                <button (click)='onToggleUserActivation(user._id, false)'>Deactivate</button>
+            </ng-container>
+            <ng-template #userInActive>
+                <button (click)='onToggleUserActivation(user._id, true)'>Activate</button>
+            </ng-template>
+
+            <!-- Promote/Demote User -->
+            <ng-container *ngIf="user.isAdmin; else userNotAdmin">
+                <button (click)='onToggleUserAdmin(user._id, false)'>Demote Admin</button>
+            </ng-container>
+            <ng-template #userNotAdmin>
+                <button (click)='onToggleUserAdmin(user._id, true)'>Promote to Admin</button>
+            </ng-template>
+
+            <button>Delete</button>
+          </div>
+        </div>
+
+        <!-- List of song song controlls -->
+        <div *ngIf="viewToggle == 'songs'">
+          <h4>Users</h4>
+          <div class="row" *ngFor='let song of songs'>
+            <p>{{song.name}}</p>
+            <p>{{song.artist}}</p>
+            <p>{{song.album}}</p>
+
+            <!-- Hide/UnHide Song -->
+            <ng-container *ngIf="song.hidden; else shown">
+                <button (click)='onToggleSongVisibility(song._id, false)'>Show</button>
+            </ng-container>
+            <ng-template #shown>
+                <button (click)='onToggleSongVisibility(song._id, true)'>Hide</button>
+            </ng-template>
+            <button>Delete</button>
+          </div>
+        </div>
+
+      </div>
+
+
+    </ng-container>
+    <ng-template #failed>
+
+      <!-- Admin Failed -->
+
+      <h2>Unauthorized</h2>
+
+    </ng-template>
+
+
+  </ng-template>
+
+
+
+</div>

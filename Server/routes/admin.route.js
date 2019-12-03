@@ -13,4 +13,7 @@ router.post('/toggle/user/:id', controller.toggle_user);
 //Promotes/Demotes an admin
 router.post('/toggle/admin/:id', controller.toggle_admin);
 
+//Checks if the user is an admin
+router.get('/check', controller.check_admin)
+
 module.exports = router;
