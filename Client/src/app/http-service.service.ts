@@ -41,6 +41,11 @@ export class HttpServiceService {
     return this._http.get('/api/review/get/user/' + id);
   }
 
+  // Gets the review count and rating for a song
+  getSongReviewData(id){
+    return this._http.get('/api/review/get/song/data/' + id);
+  }
+
   // Manages adding a review to a song
   addReview(songId, rating, content){
     return this._http.post(

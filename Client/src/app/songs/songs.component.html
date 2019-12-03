@@ -2,8 +2,17 @@
   <div *ngIf='loginState.user'>
     <button><a routerLink="/add-song">Add Song</a></button>
   </div>
-  <ul *ngIf='songs'>
-    <li *ngFor="let song of songs">
+  <div class="row" *ngIf='search'>
+    Search <input placeholder="Search" type='text'(input)="onSearchChange($event.target.value)" [(ngModel)]='searchParam'/>
+    Organize By: <select name="organize" [(ngModel)]='organize' (ngModelChange)="onFilterChange($event)" >
+        <option value="pop-a">Popularity Acending</option>
+        <option value="pop-d">Popularity Decending</option>
+        <option value="name-a">Name Acending (A-Z)</option>
+        <option value="name-d">Name Decending (Z-A)</option>
+      </select>
+  </div>
+  <ul *ngIf='songsDisplay'>
+    <li *ngFor="let song of songsDisplay">
         <app-song-tile [song]='song' ></app-song-tile>
     </li>
   </ul>

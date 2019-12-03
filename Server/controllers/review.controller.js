@@ -35,6 +35,31 @@ exports.get_all_reviews = (req, res) => {
   Review.find({}, (err, reviews) => requestHandler.generic(res, err, reviews, "reviews"));
 }
 
+//Gets the song review meta data
+exports.get_song_review_data = (req, res) => {
+  //Gets all reviews for a song
+  Review.find({songID: req.params.id}, (err, reviews) => {
+    if(err) return res.status(404).json({error: true, content: err});
+    else if(reviews == undefined || reviews == null){
+      //No reviews found
+      return res.json({error: false, rating: 0, reviews: 0});
+    }
+    else{
+      //Reviews found, calculate review data
+      let songReviewCount = reviews.length; //Amount of reviews
+      let avgSongRating = 0; //Rating for the song
+      reviews.forEach((review) => avgSongRating += review.rating);
+      let rating = songReviewCount == 0 ? 0 : Math.round( avgSongRating / songReviewCount * 10 ) / 10; //Error checks if count is zero, onnly returns 1 decimal place
+
+      //Returns the calculated data
+      return res.json({error: false, rating: rating, reviews: songReviewCount});
+      
+    }
+  });
+
+  
+}
+
 exports.edit_review = (req, res) => {
 
   let editReview = {}

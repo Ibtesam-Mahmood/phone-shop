@@ -13,6 +13,9 @@ router.post('/add/:song', auth.auth, controller.post_review);
 //All reviews for a song
 router.get('/get/song/:id', controller.get_song_reviews);
 
+//Getting all review meta data for a song
+router.get('/get/song/data/:id', controller.get_song_review_data);
+
 //All reviews for a user
 router.get('/get/user/:id', controller.get_user_reviews);
 
