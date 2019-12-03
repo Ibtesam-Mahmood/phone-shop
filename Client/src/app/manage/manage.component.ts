@@ -97,8 +97,25 @@ export class ManageComponent implements OnInit {
           song.hidden = toggle;
           return;
         }
-      })
+      });
     });
   }
+
+  // Deletes the user from the system
+  deleteUser(id){
+    this._http.deleteUser(id).subscribe(() => {
+      // On successful delete, removes the user from the List
+      this.users = this.users.filter(user => user._id !== id);
+    });
+  }
+
+  // Deletes the song from the system
+  deleteSong(id){
+    this._http.deleteSong(id).subscribe(() => {
+      // On successful delete, removes the song from the List
+      this.songs = this.songs.filter(song => song._id !== id);
+    });
+  }
+
 
 }

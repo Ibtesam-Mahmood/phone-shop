@@ -47,7 +47,7 @@
                 <button (click)='onToggleUserAdmin(user._id, true)'>Promote to Admin</button>
             </ng-template>
 
-            <button>Delete</button>
+            <button (click)='deleteUser(user._id)'>Delete</button>
           </div>
         </div>
 
@@ -66,7 +66,7 @@
             <ng-template #shown>
                 <button (click)='onToggleSongVisibility(song._id, true)'>Hide</button>
             </ng-template>
-            <button>Delete</button>
+            <button (click)='deleteSong(song._id)' >Delete</button>
           </div>
         </div>
 

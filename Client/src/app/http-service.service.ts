@@ -23,6 +23,11 @@ export class HttpServiceService {
     return this._http.get('api/user/get');
   }
 
+  // Deletes the user from the system
+  deleteUser(id){
+    return this._http.delete('api/user/delete/' + id)
+  }
+
 
   //Review endpoints
 
@@ -45,6 +50,7 @@ export class HttpServiceService {
     );
   }
 
+  // Deletes the review from the system
   deleteReview(id){
     return this._http.delete('/api/review/delete/' + id);
   }
@@ -72,8 +78,14 @@ export class HttpServiceService {
     });
   }
 
+  // Gets the song by id
   getSongById(id){
     return this._http.get('/api/songs/get/' + id);
+  }
+
+  // Delets the song from the system
+  deleteSong(id){
+    return this._http.delete('/api/songs/delete/' + id)
   }
 
   //Auth enpoints
