@@ -16,6 +16,12 @@ export class LoginComponent implements OnInit {
   // The control for the login form
   form: FormGroup;
 
+  // Holds the status for when login fails
+  // user - no user found
+  // pass - incorrect password or email
+  // disabled - user inactive
+  loginFailedStatus: string = null;
+
   constructor(private _loginState: LoginStateService, private router: Router) { }
 
   ngOnInit() {
@@ -34,9 +40,25 @@ export class LoginComponent implements OnInit {
 
   // Logs the user in
   login(){
-    this._loginState.login(this.email.value, this.password.value, (val) => {
+    this._loginState.login(this.email.value, this.password.value, (val, err) => {
       if(val){
-        this.router.navigate(['/songs']); // Routers to the songs page when logged in
+        // Login Successful
+        return this.router.navigate(['/songs']); // Routers to the songs page when logged in
+      }
+      else{
+        // Login Failed
+        if(err.status === 404){
+          // No user found
+          this.loginFailedStatus = 'user';
+        }
+        else if(err.status === 401){
+          // Email or password incorrect
+          this.loginFailedStatus = 'pass';
+        }
+        else if(err.status === 403){
+          // User Deactivated
+          this.loginFailedStatus = 'disabled';
+        }
       }
     });
   }

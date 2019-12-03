@@ -54,10 +54,6 @@ export class LoginStateService {
     this._cookieService.delete('auth');
   }
 
-  /*
-    Songs
-  */
-
   //Adds a song to the server
   addSong(name, artist, album, img){
     this._http.addSong({name, artist, img, album});

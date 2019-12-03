@@ -28,6 +28,20 @@
       <input type="submit" value="Login">
     </form>
 
+    <div *ngIf="loginFailedStatus"
+          class="alert alert-danger">
+
+      <div *ngIf="loginFailedStatus === 'user'">
+        No user found with that email.
+      </div>
+      <div *ngIf="loginFailedStatus === 'pass'">
+        Email or password incorrect.
+      </div>
+      <div *ngIf="loginFailedStatus === 'disabled'">
+        This user is marked as Deactivated. Contact the administrator to reactivate your account.
+      </div>
+    </div>
+
     <div>
       <p>Or <a routerLink="/signup">Create a new Account</a></p>
     </div>

@@ -15,7 +15,6 @@ export class NavigatiorComponent implements OnInit {
   constructor(public loginState: LoginStateService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.loginState.user);
   }
 
   // Logs the user out of the system
