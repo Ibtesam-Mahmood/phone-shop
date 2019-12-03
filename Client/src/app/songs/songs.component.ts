@@ -16,7 +16,7 @@ export class SongsComponent implements OnInit {
   constructor(private _http: HttpServiceService, public loginState: LoginStateService) { }
 
   ngOnInit() {
-    this._http.getAllSongs().subscribe(data => {
+    this._http.getAllSongs("hidden=false").subscribe(data => {
       this.songs = data['Songs'];
       console.log(this.songs)
     })

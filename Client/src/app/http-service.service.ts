@@ -58,8 +58,8 @@ export class HttpServiceService {
   //Song endpoints
 
   //Used to get all songs
-  getAllSongs(){
-    return this._http.get('/api/songs/get');
+  getAllSongs(query = ""){
+    return this._http.get('/api/songs/get?' + query);
   }
 
   // Retreiving all reviews by a user
