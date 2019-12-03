@@ -8,18 +8,11 @@
   </div>
 
   <div class="reviews" *ngIf='reviews.length > 0'>
-    <div *ngFor='let review of reviews' class="d-md-flex align-items-center p-5 justify-content-center">
-      <a routerLink="/profile/{{userID}}">{{user.firstName + " " + user.lastName}}</a>
-      <h1>{{review.rating}}</h1>
-      <p>{{review.content}}</p>
-      <div *ngIf='loginState.user'>
-          <button *ngIf='review.userID === loginState.user._id' (click)='delete(review._id)' >Delete</button>
-      </div>
-    </div>
+    <app-review-tile *ngFor='let review of reviews'[review]='review'></app-review-tile>
   </div>
 
   <div class="songs" *ngIf='songs.length > 0'>
-      <app-song-tile *ngFor='let song of songs' [song]='song' ></app-song-tile>
+    <app-song-tile *ngFor='let song of songs' [song]='song' ></app-song-tile>
   </div>
 
 </div>

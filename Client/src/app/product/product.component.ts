@@ -55,10 +55,13 @@ export class ProductComponent implements OnInit {
       this.reviews = data['reviews']; // Gets all reviews for this song
 
       this.reviews.forEach(review => {
-        // Gets the user data for each review
-        this._http.getUserById(review.userID).toPromise().then(data => {
-          // Plugs the user data into the review
-          review.user = data['user']['firstName'] + " " + data['user']['lastName'];
+        // Gets the user userData for each review
+        this._http.getUserById(review.userID).toPromise().then(userData => {
+          // Plugs the user userData into the review
+          review.user = userData['user']['firstName'] + " " + userData['user']['lastName'];
+        }).catch(err => {
+          //If no user found does not get the user property for the review
+
         });
       })
     });
@@ -66,7 +69,6 @@ export class ProductComponent implements OnInit {
 
   submitReview(){
     this._http.addReview(this.songID, this.rating, this.message).toPromise().then(data => {
-      console.log(data);
       let review = data['body']['review'];
       //Adds the user name to the review
       review.user = this.loginState.user['firstName'] + " " + this.loginState.user['lastName'];

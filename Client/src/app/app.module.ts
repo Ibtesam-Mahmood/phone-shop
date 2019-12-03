@@ -20,6 +20,7 @@ import { SongTileComponent } from './widgets/song-tile/song-tile.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ManageComponent } from './manage/manage.component';
+import { ReviewTileComponent } from './widgets/review-tile/review-tile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ManageComponent } from './manage/manage.component';
     SongTileComponent,
     ProductComponent,
     ProfileComponent,
-    ManageComponent
+    ManageComponent,
+    ReviewTileComponent
   ],
   imports: [
     BrowserModule,

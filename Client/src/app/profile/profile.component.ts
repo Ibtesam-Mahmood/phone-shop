@@ -57,6 +57,10 @@ export class ProfileComponent implements OnInit {
     //Gets all reviews by the user
     this._http.getReviewByUserId(this.userID).subscribe(data => {
       this.reviews = data['reviews'];
+      // Adds the user name onto the review
+      this.reviews.forEach(review => {
+        review.user = this.user['firstName'] + " " + this.user["lastName"];
+      })
     });
 
     //Gets all songs by the user
